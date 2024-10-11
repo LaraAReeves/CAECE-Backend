@@ -1,0 +1,118 @@
+-- Crear Schema
+-- create schema proyecto_UNSAM_CAECE
+
+-- Tabla de Tipos de Aulas
+CREATE TABLE IF NOT EXISTS Tipos_Aula (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL
+);
+
+-- Tabla de Tipos de Permisos
+CREATE TABLE IF NOT EXISTS Tipos_Permiso (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL
+);
+
+-- Tabla de Personas
+CREATE TABLE IF NOT EXISTS Personas (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+-- Tabla de Permisos, con referencia a Tipos de Permiso y Personas
+CREATE TABLE IF NOT EXISTS Permisos (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    persona_id BIGINT,
+    tipo_permiso_id BIGINT,
+    FOREIGN KEY (persona_id) REFERENCES Personas(id),
+    FOREIGN KEY (tipo_permiso_id) REFERENCES Tipos_Permiso(id)
+);
+
+-- Tabla de Aulas, con referencia a Tipos de Aula
+CREATE TABLE IF NOT EXISTS Aulas (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    tipo_aula_id BIGINT,
+    FOREIGN KEY (tipo_aula_id) REFERENCES Tipos_Aula(id)
+);
+
+-- Tabla de Carreras
+CREATE TABLE IF NOT EXISTS Carreras (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL
+);
+
+-- Tabla de Asignaturas
+CREATE TABLE IF NOT EXISTS Asignaturas (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    carrera_id BIGINT,
+    FOREIGN KEY (carrera_id) REFERENCES Carreras(id)
+);
+
+-- Tabla de Profesores_Asignaturas para asociar personas (profesores) con asignaturas
+CREATE TABLE IF NOT EXISTS Profesores_Asignaturas (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    persona_id BIGINT,
+    asignatura_id BIGINT,
+    FOREIGN KEY (persona_id) REFERENCES Personas(id),
+    FOREIGN KEY (asignatura_id) REFERENCES Asignaturas(id)
+);
+
+-- Tabla de Horarios
+CREATE TABLE IF NOT EXISTS Horarios (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    dia ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado') NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME NOT NULL,
+    aula_id BIGINT,
+    asignatura_id BIGINT,
+    FOREIGN KEY (aula_id) REFERENCES Aulas(id),
+    FOREIGN KEY (asignatura_id) REFERENCES Asignaturas(id)
+);
+
+-- Tabla de Ocupación de Aulas (Opcional: para hacer seguimiento de la ocupación de las aulas)
+CREATE TABLE IF NOT EXISTS Ocupacion_Aulas (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    aula_id BIGINT,
+    horario_id BIGINT,
+    fecha DATE NOT NULL,
+    FOREIGN KEY (aula_id) REFERENCES Aulas(id),
+    FOREIGN KEY (horario_id) REFERENCES Horarios(id)
+);
+
+-- Datos iniciales de ejemplo (opcional)
+
+-- Insertar tipos de permisos
+INSERT INTO Tipos_Permiso (nombre) VALUES ('Profesor'), ('Alumno'), ('Administrador');
+
+-- Insertar tipos de aula
+INSERT INTO Tipos_Aula (nombre) VALUES ('Laboratorio'), ('Sala Informática'), ('Aula Estándar');
+
+-- Insertar carreras
+INSERT INTO Carreras (nombre) VALUES ('TPI'), ('TRI');
+
+-- Insertar personas
+INSERT INTO Personas (nombre, apellido, email) VALUES ('Juan', 'Pérez', 'juan.perez@unsam.edu.ar'), ('Ana', 'López', 'ana.lopez@unsam.edu.ar');
+
+-- Insertar permisos para personas
+INSERT INTO Permisos (persona_id, tipo_permiso_id) VALUES (1, 1), (2, 2);
+
+-- Insertar asignaturas
+INSERT INTO Asignaturas (nombre, carrera_id) VALUES ('Programación', 1), ('Redes', 2);
+
+-- Insertar asignaciones de profesores a asignaturas
+INSERT INTO Profesores_Asignaturas (persona_id, asignatura_id) VALUES (1, 1);
+
+-- Insertar horarios
+INSERT INTO Horarios (dia, hora_inicio, hora_fin, aula_id, asignatura_id) VALUES ('Lunes', '09:00:00', '11:00:00', 1, 1);
+
+-- Insertar aulas
+INSERT INTO Aulas (nombre, tipo_aula_id) VALUES ('Aula 101', 3), ('Laboratorio A', 1), ('Sala Informática 1', 2);
+
+-- Suponiendo que el ID de Aula 101 es 1
+INSERT INTO Horarios (dia, hora_inicio, hora_fin, aula_id, asignatura_id) 
+VALUES ('Lunes', '09:00:00', '11:00:00', 1, 1);  
+
