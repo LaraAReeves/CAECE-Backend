@@ -27,11 +27,32 @@ public class personaController {
         List<persona> personas = personaService.listarPersonas();
         return ResponseEntity.ok(personas);
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<persona> obtenerPersonaPorId(@PathVariable Long id) {
         return personaService.obtenerPersonaPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    @PostMapping
+    public ResponseEntity<persona> crearPersona(@RequestBody persona persona) {
+        return ResponseEntity.ok(personaService.guardarPersona(persona));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<persona> actualizarPersona(@PathVariable Long id, @RequestBody persona persona) {
+        return personaService.actualizarPersona(id, persona)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarPersona(@PathVariable Long id) {
+        if (personaService.eliminarPersona(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }

@@ -33,4 +33,28 @@ public class persona {
 
     @Column
     private String email;
+    
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public String getApellido() {
+        return this.apellido;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setNombre(String nombre) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setApellido(String apellido) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setEmail(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

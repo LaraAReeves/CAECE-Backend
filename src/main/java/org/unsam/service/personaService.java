@@ -9,6 +9,7 @@ public interface personaService {
     persona guardarPersona(persona persona);
     List<persona> listarPersonas();
     Optional<persona> obtenerPersona(Long id);
-
     Optional<persona> obtenerPersonaPorId(Long id);
+    Optional<persona> actualizarPersona(Long id, persona personaActualizada);
+    boolean eliminarPersona(Long id);
 }

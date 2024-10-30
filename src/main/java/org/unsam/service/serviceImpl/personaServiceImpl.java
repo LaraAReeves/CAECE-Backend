@@ -27,11 +27,32 @@ public class personaServiceImpl implements personaService {
 
     @Override
     public Optional<persona> obtenerPersona(Long id) {
-        return Optional.empty();
+        return personaRepository.findById(id);
     }
 
     @Override
     public Optional<persona> obtenerPersonaPorId(Long id) {
         return personaRepository.findById(id);
+    }
+
+    @Override
+    public Optional<persona> actualizarPersona(Long id, persona personaActualizada) {
+        return personaRepository.findById(id)
+                .map(persona -> {
+                    persona.setNombre(personaActualizada.getNombre());
+                    persona.setApellido(personaActualizada.getApellido());
+                    persona.setEmail(personaActualizada.getEmail());
+                    return personaRepository.save(persona);
+                });
+    }
+
+    @Override
+    public boolean eliminarPersona(Long id) {
+        try {
+            personaRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
