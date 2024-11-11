@@ -1,5 +1,6 @@
 package org.unsam.service.serviceImpl;
 
+import java.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.unsam.entity.horario;
@@ -26,8 +27,11 @@ public class horarioServiceImpl implements horarioService {
     }
 
     @Override
-    public horario guardarHorario(horario horario) {
-        return horarioRepository.save(horario);
+    public horario guardarHorario(horario nuevoHorario) {
+        if (hayConflictoHorario(nuevoHorario.getAulaId(), nuevoHorario.getHoraInicio(), nuevoHorario.getHoraFin())) {
+            throw new IllegalArgumentException("Conflicto de horario: ya existe una clase en esta aula durante este tiempo.");
+        }
+        return horarioRepository.save(nuevoHorario);
     }
 
     @Override
@@ -51,5 +55,14 @@ public class horarioServiceImpl implements horarioService {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    @Override
+    public boolean hayConflictoHorario(Long aulaId, LocalTime horaInicio, LocalTime horaFin) {
+    List<horario> horariosExistentes = horarioRepository.findAll();
+    
+    return horariosExistentes.stream()
+        .filter(h -> h.getAulaId().equals(aulaId))
+        .anyMatch(h -> (h.getHoraInicio().isBefore(horaFin) && horaInicio.isBefore(h.getHoraFin())));
     }
 }

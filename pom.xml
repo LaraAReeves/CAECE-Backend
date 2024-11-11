@@ -50,6 +50,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.ssd-utils</groupId>
+            <artifactId>bean-converter-example</artifactId>
+            <version>0.0.2</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

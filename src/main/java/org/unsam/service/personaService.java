@@ -12,4 +12,9 @@ public interface personaService {
     Optional<persona> obtenerPersonaPorId(Long id);
     Optional<persona> actualizarPersona(Long id, persona personaActualizada);
     boolean eliminarPersona(Long id);
+
+    Optional<persona> obtenerPersonaPorUsername(String username);
+    String hashPassword(String password);
+    boolean verificarPassword(String passwordIngresada, String passwordHasheada);
+    
 }

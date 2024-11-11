@@ -25,11 +25,11 @@ public class horario {
     @Column
     private String dia;
 
-    @Column
+    @Column(name = "hora_inicio")
     private LocalTime horaInicio;
 
-    @Column
-    private LocalTime horaFin;
+    @Column(name = "hora_fin")
+    private LocalTime horaFin; 
 
     @Column(name = "aula_id")
     private Long aulaId;
@@ -38,6 +38,10 @@ public class horario {
     private Long asignaturaId;
 
     // Getters y setters
+    public Long getId() {
+        return aulaId;
+    }    
+    
     public String getDia() {
         return dia;
     }
@@ -77,4 +81,5 @@ public class horario {
     public void setAsignaturaId(Long asignaturaId) {
         this.asignaturaId = asignaturaId;
     }
+
 }

@@ -21,14 +21,18 @@ public class tipoAula {
     private Long id;
 
     @Column
-    private String descripcion;
+    private String nombre;
 
     // Getters y setters
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String newNombre) {
+        this.nombre = newNombre;
+    }
+    
+    public Long getId() {
+    return id;
     }
 }

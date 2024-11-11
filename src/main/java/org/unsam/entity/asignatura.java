@@ -25,7 +25,10 @@ public class asignatura {
 
     @Column
     private String codigo;
-
+    
+    @Column(name = "carrera_id")
+    private Long carreraId;
+    
     // Getters y setters
     public String getNombre() {
         return nombre;
@@ -41,5 +44,17 @@ public class asignatura {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getCarreraId() {
+        return codigo;
+    }
+
+    public void setCarreraId(String codigo) {
+        this.codigo = codigo;
+    }
+    
+    public Long getId() {
+    return id;
     }
 }
