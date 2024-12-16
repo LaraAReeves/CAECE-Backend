@@ -1,4 +1,4 @@
-package org.unsam.service.serviceImpl;
+/*package org.unsam.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,3 +49,5 @@ public class tipoPermisoServiceImpl implements tipoPermisoService {
         return false;
     }
 }
+
+ */

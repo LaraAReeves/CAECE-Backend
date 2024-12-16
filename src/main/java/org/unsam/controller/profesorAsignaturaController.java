@@ -7,6 +7,7 @@ import org.unsam.entity.profesorAsignatura;
 import org.unsam.service.profesorAsignaturaService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/profesor-asignatura")
@@ -22,7 +23,8 @@ public class profesorAsignaturaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<profesorAsignatura> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(profesorAsignaturaService.obtenerPorId(id).orElseThrow());
+        return ResponseEntity.ok(profesorAsignaturaService.obtenerPorId(id).orElseThrow(() -> new NoSuchElementException("El profesorAsignatura con id " + id + " no existe"))
+        );
     }
 
     @GetMapping("/profesor/{profesorId}")
@@ -42,7 +44,8 @@ public class profesorAsignaturaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<profesorAsignatura> actualizarAsignacion(@PathVariable Long id, @RequestBody profesorAsignatura profesorAsignatura) {
-        return ResponseEntity.ok(profesorAsignaturaService.actualizarAsignacion(id, profesorAsignatura).orElseThrow());
+        return ResponseEntity.ok(profesorAsignaturaService.actualizarAsignacion(id, profesorAsignatura).orElseThrow(() -> new NoSuchElementException("No se pudo actualizar la asignación. El profesorAsignatura con id " + id + " no existe."))
+        );
     }
 
     @DeleteMapping("/{id}")

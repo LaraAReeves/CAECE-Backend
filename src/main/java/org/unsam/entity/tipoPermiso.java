@@ -1,4 +1,4 @@
-package org.unsam.entity;
+/*package org.unsam.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,3 +35,5 @@ public class tipoPermiso {
     return id;
     }
 }
+
+ */

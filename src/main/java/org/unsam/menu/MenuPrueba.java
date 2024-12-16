@@ -22,8 +22,8 @@ public class MenuPrueba implements CommandLineRunner {
     private asignaturaService asignaturaService;
     @Autowired
     private tipoAulaService tipoAulaService;
-    @Autowired
-    private tipoPermisoService tipoPermisoService;
+    //@Autowired
+    //private tipoPermisoService tipoPermisoService;
     @Autowired
     private carreraService carreraService;
     @Autowired
@@ -68,7 +68,7 @@ public class MenuPrueba implements CommandLineRunner {
                     menuTiposAula();
                     break;
                 case 6:
-                    menuTiposPermiso();
+                    //menuTiposPermiso();
                     break;
                 case 7:
                     menuCarreras();
@@ -100,7 +100,7 @@ public class MenuPrueba implements CommandLineRunner {
         
         switch (opcion) {
             case 1:
-                listarPersonas();
+                //listarPersonas();
                 break;
             case 2:
                 agregarPersona();
@@ -184,6 +184,7 @@ public class MenuPrueba implements CommandLineRunner {
         }
     }
 
+    /*
     private void menuTiposPermiso() {
         System.out.println("\n--- Gestión de Tipos de Permiso ---");
         System.out.println("1. Listar Tipos de Permiso");
@@ -202,6 +203,8 @@ public class MenuPrueba implements CommandLineRunner {
                 break;
         }
     }
+
+     */
 
     private void menuCarreras() {
         System.out.println("\n--- Gestión de Carreras ---");
@@ -222,12 +225,15 @@ public class MenuPrueba implements CommandLineRunner {
         }
     }
 
+    /*
 private void listarPersonas() {
     System.out.println("\nListado de Personas:");
     personaService.listarPersonas().forEach(p -> {
         System.out.println(p.getId() + ": " + p.getNombre() + " " + p.getApellido() + " - Rol: " + p.getRol());
     });
 }
+
+     */
 
 private void agregarPersona() {
     System.out.println("\nAgregar nueva Persona:");
@@ -254,8 +260,8 @@ private void agregarPersona() {
 
     // Listar tipos de permiso
     System.out.println("\n--- Tipos de Permiso ---");
-    tipoPermisoService.listarTiposPermiso().forEach(tp -> 
-        System.out.println(tp.getId() + ": " + tp.getNombre()));
+    //tipoPermisoService.listarTiposPermiso().forEach(tp ->
+    //    System.out.println(tp.getId() + ": " + tp.getNombre()));
 
     // Preguntar al usuario por el ID del tipo de permiso
     System.out.print("Seleccione el ID del tipo de permiso: ");
@@ -361,9 +367,10 @@ private void agregarHorario() {
         System.out.println("Tipo de Aula agregado con éxito.");
     }
 
+    /*
     private void listarTiposPermiso() {
         System.out.println("\nListado de Tipos de Permiso:");
-        tipoPermisoService.listarTiposPermiso().forEach(tp -> 
+        tipoPermisoService.listarTiposPermiso().forEach(tp ->
             System.out.println(tp.getId() + ": " + tp.getNombre()));
     }
 
@@ -377,6 +384,8 @@ private void agregarHorario() {
         tipoPermisoService.guardarTipoPermiso(nuevoTipoPermiso);
         System.out.println("Tipo de Permiso agregado con éxito.");
     }
+
+     */
 
     private void listarCarreras() {
         System.out.println("\nListado de Carreras:");

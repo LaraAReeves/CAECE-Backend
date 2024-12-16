@@ -19,10 +19,13 @@ public class authService {
         return false;
     }
 
+    /*
     public String obtenerRol(String username) {
         return personaService.obtenerPersonaPorUsername(username)
             .map(persona::getRol) // Obtiene el nombre del rol como String
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado o rol no asignado"));
     }
+
+     */
 
 }

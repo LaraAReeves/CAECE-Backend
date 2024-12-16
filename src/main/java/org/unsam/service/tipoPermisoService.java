@@ -1,4 +1,4 @@
-package org.unsam.service;
+/*package org.unsam.service;
 
 import org.unsam.entity.tipoPermiso;
  import java.util.List;
@@ -11,3 +11,5 @@ public interface tipoPermisoService {
     Optional<tipoPermiso> actualizarTipoPermiso(Long id, tipoPermiso tipoPermiso);
     boolean eliminarTipoPermiso(Long id);
 }
+
+ */

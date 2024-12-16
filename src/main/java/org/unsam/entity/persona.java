@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.unsam.service.tipoPermisoService;
+//import org.unsam.service.tipoPermisoService;
 
 @Entity
 @Table(name = "Personas")
@@ -92,7 +92,8 @@ public class persona {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    /*
     // Servicio para acceder a los tipos de permiso
     @Autowired
     private tipoPermisoService tipoPermisoService;
@@ -122,5 +123,7 @@ public class persona {
             System.out.println("Tipo de permiso no encontrado");
         }
     }
+
+     */
 }
 
