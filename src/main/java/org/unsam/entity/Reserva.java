@@ -19,20 +19,59 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "aula_id")
-    private aula aula;
+    private Aula aula;
 
+    /*
     @ManyToOne
     @JoinColumn(name = "horario_id")
-    private horario horario;
+    private Horario horario;
+     */
 
     @ManyToOne
     @JoinColumn(name = "profesor_id")
-    private persona profesor;
+    private Profesor profesor;
 
     @Column(name = "fecha")
     private LocalDate fecha;
 
+    private String turno;
+
     // Getters y setters
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDate getFecha() {
+        return this.fecha;
+    }
+
+    public Aula getAula() {
+        return this.aula;
+    }
+
+    public String getTurno() {
+        return this.turno;
+    }
+
+    public Profesor getProfesor() {
+        return this.profesor;
+    }
+
+    public void setFecha(LocalDate newFecha) {
+        this.fecha = newFecha;
+    }
+
+    public void setAula(Aula newAula) {
+        this.aula = newAula;
+    }
+
+    public void setTurno(String newTurno) {
+        this.turno = newTurno;
+    }
+
+    public void setProfesor(Profesor newProfesor) {
+        this.profesor = newProfesor;
+    }
     
 }

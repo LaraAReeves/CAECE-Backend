@@ -13,21 +13,21 @@ import org.unsam.entity.*;
 public class MenuPrueba implements CommandLineRunner {
 
     @Autowired
-    private personaService personaService;
+    private PersonaService personaService;
     @Autowired
-    private aulaService aulaService;
+    private AulaService aulaService;
     @Autowired
-    private horarioService horarioService;
+    private HorarioService horarioService;
     @Autowired
-    private asignaturaService asignaturaService;
+    private AsignaturaService asignaturaService;
     @Autowired
-    private tipoAulaService tipoAulaService;
+    private TipoAulaService tipoAulaService;
     //@Autowired
     //private tipoPermisoService tipoPermisoService;
     @Autowired
-    private carreraService carreraService;
+    private CarreraService carreraService;
     @Autowired
-    private profesorAsignaturaService profesorAsignaturaService;
+    private ProfesorAsignaturaService profesorAsignaturaService;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -269,7 +269,7 @@ private void agregarPersona() {
     scanner.nextLine(); // Consumir el salto de línea
 
     // Crear una nueva instancia de persona
-    persona nuevaPersona = new persona();
+    Persona nuevaPersona = new Persona();
     nuevaPersona.setNombre(nombre);
     nuevaPersona.setApellido(apellido);
     nuevaPersona.setEmail(email); // Establecer el email
@@ -293,7 +293,7 @@ private void agregarPersona() {
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
 
-        aula nuevaAula = new aula();
+        Aula nuevaAula = new Aula();
         nuevaAula.setNombre(nombre);
         aulaService.guardarAula(nuevaAula);
         System.out.println("Aula agregada con éxito.");
@@ -317,7 +317,7 @@ private void agregarHorario() {
     LocalTime horaInicio = LocalTime.parse(horaInicioStr);
     LocalTime horaFin = LocalTime.parse(horaFinStr);
 
-    horario nuevoHorario = new horario();
+    Horario nuevoHorario = new Horario();
     nuevoHorario.setDia(dia);
     nuevoHorario.setHoraInicio(horaInicio);
     nuevoHorario.setHoraFin(horaFin);
@@ -343,7 +343,7 @@ private void agregarHorario() {
         System.out.print("Código: ");
         String codigo = scanner.nextLine();
 
-        asignatura nuevaAsignatura = new asignatura();
+        Asignatura nuevaAsignatura = new Asignatura();
         nuevaAsignatura.setNombre(nombre);
         nuevaAsignatura.setCodigo(codigo);
         asignaturaService.guardarAsignatura(nuevaAsignatura);
@@ -361,7 +361,7 @@ private void agregarHorario() {
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
 
-        tipoAula nuevoTipoAula = new tipoAula();
+        TipoAula nuevoTipoAula = new TipoAula();
         nuevoTipoAula.setNombre(nombre);
         tipoAulaService.guardarTipoAula(nuevoTipoAula);
         System.out.println("Tipo de Aula agregado con éxito.");
@@ -398,7 +398,7 @@ private void agregarHorario() {
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
 
-        carrera nuevaCarrera = new carrera();
+        Carrera nuevaCarrera = new Carrera();
         nuevaCarrera.setNombre(nombre);
         carreraService.guardarCarrera(nuevaCarrera);
         System.out.println("Carrera agregada con éxito.");
@@ -406,9 +406,9 @@ private void agregarHorario() {
 
     private void verAulasOcupadas() {
         System.out.println("\nA ulas Ocupadas:");
-        List<horario> horariosActuales = horarioService.listarHorarios();
+        List<Horario> horariosActuales = horarioService.listarHorarios();
         horariosActuales.forEach(h -> {
-            aula aulaOcupada = aulaService.obtenerAulaPorId(h.getAulaId()).orElse(null);
+            Aula aulaOcupada = aulaService.obtenerAulaPorId(h.getAulaId()).orElse(null);
             if (aulaOcupada != null) {
                 System.out.println("Aula: " + aulaOcupada.getNombre() + 
                                  " - Día: " + h.getDia() + 
@@ -420,8 +420,8 @@ private void agregarHorario() {
     private void verProfesoresAsignaturas() {
         System.out.println("\nProfesores y sus Asignaturas:");
         profesorAsignaturaService.listarProfesoresAsignaturas().forEach(pa -> {
-            persona profesor = personaService.obtenerPersonaPorId(pa.getProfesorId()).orElse(null);
-            asignatura asignatura = asignaturaService.obtenerAsignaturaPorId(pa.getAsignaturaId()).orElse(null);
+            Persona profesor = personaService.obtenerPersonaPorId(pa.getProfesorId()).orElse(null);
+            Asignatura asignatura = asignaturaService.obtenerAsignaturaPorId(pa.getAsignaturaId()).orElse(null);
             if (profesor != null && asignatura != null) {
                 System.out.println("Profesor: " + profesor.getNombre() + " " + profesor.getApellido() + 
                                  " - Asignatura: " + asignatura.getNombre());
